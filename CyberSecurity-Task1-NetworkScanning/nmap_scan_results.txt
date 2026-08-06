@@ -1,0 +1,48 @@
+================================================================================
+NMAP SCAN ANALYSIS REPORT
+Target IP: 192.168.122.1 (Host Machine)
+Date: 2026-08-06
+Scanner OS: Alpine Linux (VM)
+================================================================================
+
+1. SCAN SUMMARY
+--------------------------------------------------------------------------------
+- Host Status: Up (Latency: 0.00032s)
+- Total Open Ports: 4
+- OS Detection: Linux 4.15 - 5.19 (90% confidence)
+- MAC Address: 52:54:00:65:D2:7C (QEMU virtual NIC)
+- Service Versioning: Successfully identified dnsmasq, PostgreSQL, and Golang.
+
+2. DETAILED PORT ANALYSIS
+--------------------------------------------------------------------------------
+PORT    STATE   SERVICE     VERSION                      RISK LEVEL    ANALYSIS
+-----   ------  ----------   ----------------------------  ------------  ---------------------------------------------------------
+53/tcp  open    domain      dnsmasq 2.90                 Low           Service: DNS Server. Handles name resolution for the VM network.
+                                                                        Risk: Potential for DNS spoofing if accessible to untrusted users.
+
+80/tcp  closed http        N/A                            None          Service: HTTP.
+                                                                        Observation: Port is closed; no web server is listening on this port.
+
+5432/tcp open   postgresql  PostgreSQL DB 9.6.0 or later  Medium        Service: Database Management System.
+                                                                        Risk: If the DB is exposed with default credentials, 
+                                                                        it allows unauthorized data extraction or modification.
+
+9000/tcp open   http        Golang net/http server        Medium        Service: Custom Web Application/API.
+                                                                        Risk: Custom Go servers may have logic flaws or 
+                                                                        unprotected endpoints.
+================================================================================
+
+3. SECURITY OBSERVATIONS
+--------------------------------------------------------------------------------
+- OS Fingerprinting: The OS was identified as Linux (4.15 - 5.19) with high confidence. The identification of the QEMU virtual NIC confirms the target is a virtualized environment.
+- Attack Surface: The target has a relatively small attack surface with only 4 ports open.
+- Service Exposure: The presence of PostgreSQL (5432) on a network interface is a significant finding. Databases should typically be bound to localhost or protected by strict firewall rules.
+- Fingerprinting: The Golang server on port 9000 provided a detailed HTTP response header, which can be used by attackers to identify the technology stack.
+
+4. FINAL CONCLUSION
+--------------------------------------------------------------------------------
+The host machine (192.168.122.1) is functioning as a gateway/server for the VM. 
+The most critical security concern is the exposed PostgreSQL database. 
+Recommendation: Implement a firewall (UFW) on the host to restrict access to port 5432 
+and port 9000 to only authorized IP addresses.
+================================================================================
