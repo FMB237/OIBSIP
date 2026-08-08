@@ -1,20 +1,75 @@
-# This is tasks 2 Readme.md 
+# Task 2: Basic Firewall Configuration with UFW
 
-1. This task mainly config of making basic firewall configs on a system that has ufw 
-2. What is UFW? and  for what is it used. 
-3. UFW stand for **Uncomplited Firewall** It is generally a touch intergrate with basic system base on debian like ubuntu or even my current linux mint 
-4. For this exercise i gonna used a small  lightweight linux distro that i have set up it with 1GB RAM and that runs smoothly with a Good GUI that is mainly **AntiX**
-5. AntiX is a very light linux distro that boots very fast and i think it do not used systemd as main system management brief let continue 
-6. Step 1 : Installing ufw  **Command :** `sudo apt install ufw`
-7. Step 2 : Enabling ufw **Command :** `sudo ufw enable`  This command is been used to enable ufw on our current system and this will display the state of the ufw
-8. Step 3 : Allow SSH using ufw **Command :** `sudo ufw allow ssh`  
-9. Since we have allow ssh connection while not connect to that VM going from the host machine from lesson 1 with know that my host machine has an ip address which is **192.168.122.1** which permit it to communicate with all the vm into this the local network.So let look for the ip address of the AntiX Vm since it is a debian base distro i gonna use the **Command:**`ip a` to get the vm ip address
-10. We can see the eth0 port with us the vm ip address which is **192.168.122.193** so we gonna do and ssh connection with this using the tools called **Remina**
-11. This connection can also be make using classic command that is `ssh username@VM_IP` in this case it is mainly **ssh Miguel@192.168.122.193**
-12. Let also install nmap on AntiX since it permit to scan the port on our vm to see the state of the port 22(ssh) of the VM
-13. This is done using the **Command :** `sudo apt install nmap` Now that nmap is install we can scan the port of the vm from our host machine and vice-versa 
-14. Step 4 : Deny HTTP **Command :**  `sudo ufw deny http`
-15. Step 5 : Allow HTTPS and Deny any ip address **Command**: `sudo ufw allow https && sudo ufw deny from 192.168.122.1` Where 192.168.122.1 is the main host ip address that communicate with the VM so it will ejected of me ssh section connection.
-16. Step 6: Let make a screenshot of all the rules we have applied so far that is using the **Command:** `sudo ufw status versbose`.Thats is mainly Verification
-17. Step 7 : Let write the bash script for scanning and performing all this operations
-18. 
+## Objective
+The goal of this task is to implement a basic security perimeter using **UFW (Uncomplicated Firewall)**. This involves configuring a set of rules to control incoming and outgoing traffic, ensuring that only authorized services (like SSH) are accessible while blocking potentially dangerous ports (like HTTP) and specific malicious IP addresses.
+
+## 🛠️ Environment Setup
+For this task, I utilized a lightweight environment to demonstrate efficiency and resource management:
+- **Target System:** AntiX Linux (Lightweight Debian-based distro)
+- **Resources:** 1GB RAM
+- **Host Machine IP:** `192.168.122.1`
+- **AntiX VM IP:** `192.168.122.193`
+- **Tools Used:** UFW, Remmina (SSH Client), Nmap, Terminal.
+
+---
+
+## 🚀 Implementation Process
+
+### 1. Installation & Initialization
+UFW was installed and enabled to start managing the network traffic of the AntiX VM.
+**Commands:**
+`sudo apt install ufw`
+`sudo ufw enable`
+
+![Installing UFW](Screenshots/Installing%20_ufw.png)
+![Enabling UFW](Screenshots/Enabling_ufw.png)
+
+### 2. Establishing Secure Access (SSH)
+To manage the VM remotely, SSH access was permitted. I verified the VM's IP address using `ip a` and established a connection via **Remmina**.
+**Command:** `sudo ufw allow ssh`
+
+![Getting VM IP](Screenshots/Getting_VM_IP.png)
+![SSH Connection](Screenshots/SSH_Remina.png)
+![Successful Connection](Screenshots/Succesful_Connection.png)
+
+### 3. Service Hardening (HTTP/HTTPS)
+To reduce the attack surface, I blocked standard HTTP traffic while allowing secure HTTPS traffic.
+**Commands:**
+`sudo ufw deny http`
+`sudo ufw allow https`
+
+![Deny HTTP](Screenshots/Deny_HTTP.png)
+
+### 4. The "Lockout" Test (Custom IP Blocking)
+To demonstrate the power of IP-based filtering, I created a rule to block my own Host machine (`192.168.122.1`). 
+**Command:** `sudo ufw deny from 192.168.122.1`
+
+**Result:** As expected, the firewall immediately dropped all packets from the host, and my active SSH session was terminated (ejected), proving that the rule was applied in real-time.
+
+![Applying Rules](Screenshots/Appling_the_two_rules.png)
+
+---
+
+##  Automation with Bash
+To make this configuration reproducible and scalable, I developed a bash script `ufw_configuration.sh`. This script automates the entire process:
+1. Resets UFW to a clean state.
+2. Sets default policies (Deny Incoming / Allow Outgoing).
+3. Applies all required rules (SSH, HTTP, HTTPS, and IP Blocking).
+4. Exports the final status to a text file for auditing.
+
+---
+
+## ✅ Final Verification
+The final state of the firewall was verified using the verbose status command.
+
+**Command:** `sudo ufw status verbose`
+
+![Final Status](Screenshots/All_Rules_Status.png)
+
+## 🔍 Security Summary
+| Rule | Action | Port/IP | Purpose |
+| :--- | :--- | :--- | :--- |
+| SSH | ALLOW | 22 | Remote Management |
+| HTTP | DENY | 80 | Block Unencrypted Web Traffic |
+| HTTPS | ALLOW | 443 | Allow Secure Web Traffic |
+| Host IP | DENY | 192.168.122.1 | Simulate Attacker Block/Lockout Test |
