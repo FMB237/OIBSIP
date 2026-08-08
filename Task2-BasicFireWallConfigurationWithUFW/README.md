@@ -61,6 +61,12 @@ To make this configuration reproducible and scalable, I developed a bash script 
 3. Applies all required rules (SSH, HTTP, HTTPS, and IP Blocking).
 4. Exports the final status to a text file for auditing.
 
+### Script Deployment & Execution
+I transferred the script from my host machine to the AntiX VM and executed it with root privileges to apply the security policy instantly.
+
+![Script Transfer](Screenshots/Script_Transfert.png)
+![Script Execution](Screenshots/Successful_Script_Execution.png)
+
 ---
 
 ## ✅ Final Verification
