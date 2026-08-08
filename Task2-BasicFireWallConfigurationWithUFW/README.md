@@ -1,7 +1,7 @@
 # Task 2: Basic Firewall Configuration with UFW
 
-## Objective
-The goal of this task is to implement a basic security perimeter using **UFW (Uncomplicated Firewall)**. This involves configuring a set of rules to control incoming and outgoing traffic, ensuring that only authorized services (like SSH) are accessible while blocking potentially dangerous ports (like HTTP) and specific malicious IP addresses.
+## 🎯 Objective
+The goal of this task is to implement a basic security perimeter using **UFW (Uncomplicated Firewall)**. This involves configuring a set of rules to control incoming and outgoing traffic, ensuring that only authorized services (like SSH) are accessible while blocking potentially dangerous ports (like HTTP) and specific IP addresses.
 
 ## 🛠️ Environment Setup
 For this task, I utilized a lightweight environment to demonstrate efficiency and resource management:
@@ -18,8 +18,10 @@ For this task, I utilized a lightweight environment to demonstrate efficiency an
 ### 1. Installation & Initialization
 UFW was installed and enabled to start managing the network traffic of the AntiX VM.
 **Commands:**
-`sudo apt install ufw`
-`sudo ufw enable`
+```bash
+sudo apt install ufw
+sudo ufw enable
+```
 
 ![Installing UFW](Screenshots/Installing%20_ufw.png)
 ![Enabling UFW](Screenshots/Enabling_ufw.png)
@@ -35,8 +37,10 @@ To manage the VM remotely, SSH access was permitted. I verified the VM's IP addr
 ### 3. Service Hardening (HTTP/HTTPS)
 To reduce the attack surface, I blocked standard HTTP traffic while allowing secure HTTPS traffic.
 **Commands:**
-`sudo ufw deny http`
-`sudo ufw allow https`
+```bash
+sudo ufw deny http
+sudo ufw allow https
+```
 
 ![Deny HTTP](Screenshots/Deny_HTTP.png)
 
@@ -50,7 +54,7 @@ To demonstrate the power of IP-based filtering, I created a rule to block my own
 
 ---
 
-##  Automation with Bash
+## 🤖 Automation with Bash
 To make this configuration reproducible and scalable, I developed a bash script `ufw_configuration.sh`. This script automates the entire process:
 1. Resets UFW to a clean state.
 2. Sets default policies (Deny Incoming / Allow Outgoing).

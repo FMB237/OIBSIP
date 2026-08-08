@@ -17,3 +17,7 @@
 15. Step 5 : Allow HTTPS and Deny any ip address **Command**: `sudo ufw allow https && sudo ufw deny from 192.168.122.1` Where 192.168.122.1 is the main host ip address that communicate with the VM so it will ejected of me ssh section connection.
 16. Step 6: Let make a screenshot of all the rules we have applied so far that is using the **Command:** `sudo ufw status versbose`.Thats is mainly Verification
 17. Step 7 : Let write the bash script for scanning and performing all this operations.
+18. Step 8 : Let test the script in real time on the AntiX VM
+19. Remmina permit to set up and SFTP Server directly so the script can be transfer from my host machine to my AntiX VM 
+20. Then make the script excuatable with the  **Command :** `chmod +x ufw_configuration.sh` the launch the script using the command `./ufw_configuration.sh` then let watch the magic to opearte
+21. 
