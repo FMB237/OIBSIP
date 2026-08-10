@@ -45,4 +45,9 @@ So This will the infrastructure of the lab
 10. login with the following credential **Username: `admin`** and **Password : `password`**
 11. Then we will be redirected to a setup.php page where at the bottom of the page we created a database by clicking on a button call create db since we have not yet initiaze a database 
 12. Then we will logout and then login again with the same credentails
-13. 
+13. Then move on the security.php file by clicking on the **DVWA Security Button on the left of the page** i have added the image to that and make sure the secutiry level is been set up to low.
+14. Now let start our Mission the Attack 
+15. We just move to that tab with the name SQL Injection and click on it then we will move to the link call **http://localhost/vulnerabilities/sqli/** as i observe the  link ends up with a sqli which means the container is mainly using as SQlite DB 
+16. Add the Screenshot of that page 
+17. On the SQL injection page the is a text input field which i will fill.Normally the app ask for user ID 1 we should return 1.But the trick here is that we  hav to return the informations about all the user inside the db
+18. For this task i will used the payload test using the **command:** `' OR '1'='1`  then i will add the images of this result 
