@@ -6,60 +6,83 @@
 
 ---
 
-## 📝 Executive Summary
-As part of my Security Analyst internship at Oasis Infobyte, I have performed a vulnerability assessment on the **Damn Vulnerable Web Application (DVWA)**. The objective was to demonstrate how improper input validation in web forms can lead to **SQL Injection (SQLi)**, allowing an attacker to bypass authentication and extract sensitive data from the database.
+## 📝 Project Overview
+This project focuses on understanding and demonstrating **SQL Injection (SQLi)** using the **Damn Vulnerable Web Application (DVWA)**. SQL Injection is a critical vulnerability where unvalidated user input is used to alter the backend database logic, allowing attackers to bypass authentication or dump sensitive data.
 
-To maintain a professional and secure workflow, I deployed the target application within a **Docker container**, ensuring the host system remained isolated from the vulnerable software.
-
-## 🛠️ Lab Infrastructure & Setup
-To make this project reproducible for other analysts, I developed a custom automation script to standardize the environment.
-
-### 1. Environment Provisioning
-I used a Bash script (`scripts/install_docker.sh`) to automate the installation of the Docker Engine on my Linux VM. This ensures that the correct GPG keys and repositories are used for a stable deployment.
-
-### 2. Target Deployment
-The vulnerable environment was launched using the following command:
-```bash
-docker run --rm -it -p 80:80 vulnerables/web-dvwa
-```
-- **Target URL:** `http://localhost`
-- **Security Level:** Set to `Low` for initial exploitation.
+### Why DVWA?
+DVWA is designed specifically for security testing. It allows analysts to practice attacks on different security levels (Low, Medium, High, Impossible) to understand how vulnerabilities are created and how to fix them.
 
 ---
 
-##  Exploitation Walkthrough
+## 🛠️ Lab Infrastructure & Setup
 
-### Step 1: Identifying the Vulnerability
-By entering a single quote (`'`) into the User ID field, the application returned a SQL syntax error. This confirmed that the input was being passed directly into a SQL query without sanitization.
+### 1. Why Docker?
+To ensure a professional and safe workflow, I deployed the lab using **Docker**. This provides several advantages:
+- **Isolation:** The vulnerable app is contained, preventing any "mess up" or risk to the host system.
+- **Reproducibility:** Containers can be destroyed and recreated instantly.
+- **Efficiency:** Faster deployment with minimal memory and disk overhead.
 
-**📸 Evidence:** `![Vulnerability Discovery](./screenshots/home.png)`
+### 2. Environment Provisioning
+I provided two scripts in the `/scripts` folder to automate the setup:
+- `install_docker.sh`: A custom script I developed to install the Docker Engine on Ubuntu/Mint systems.
+- `dvwa.sh`: A helper script to launch the DVWA container quickly and avoid human error.
 
-### Step 2: Bypassing the Query (Data Dumping)
-I used a tautology payload to force the database to return all records.
+**Deployment Command:**
+```bash
+docker run --rm -it -p 80:80 vulnerables/web-dvwa
+```
+- `-p 80:80`: Maps container port 80 to host port 80.
+- `--rm`: Automatically cleans up the container upon exit.
+
+**📸 Setup Evidence:**
+- **Pulling Image:** ![Pulling Docker Image](./screenshots/Intialing_lab_by_pulling_docker_image.png)
+- **Container Status:** ![Docker PS](./screenshots/Checking_Running_Containers_With_docker_ps.png)
+
+---
+
+## 🚀 Execution Walkthrough
+
+### Step 1: Initial Access & Configuration
+1. **Login:** Accessed `http://localhost` using credentials `admin` / `password`.
+   ![Login Screen](./screenshots/DVWA_Login_Screen.png)
+2. **Database Initialization:** Navigated to the setup page and initialized the database.
+   ![Setup Page](./screenshots/DVWA_Setup_Page.png)
+3. **Security Configuration:** Set the **DVWA Security** level to **Low**. At this level, the application performs no input validation or sanitization.
+   ![Setting Low Security](./screenshots/Applying_Low_SecurityonDVWA.png)
+
+### Step 2: Vulnerability Discovery
+I navigated to the **SQL Injection** tab. By entering a single quote (`'`) into the User ID field, the application returned a SQL syntax error, confirming that the input is concatenated directly into the query.
+
+**📸 Evidence:** 
+- **SQLi Page:** ![SQL Injection Page](./screenshots/SQL_Injection_Page.png)
+- **Error Triggered:** ![Vulnerability Error](./screenshots/Vulnerability_Error.png)
+
+### Step 3: The Attack (Data Dumping)
+To extract all user records instead of a single ID, I used a **Tautology Payload**.
+
 - **Payload:** `' OR '1'='1`
-- **Logic:** The query becomes `WHERE user_id = '' OR '1'='1'`, which is always true.
+- **Logic:** The backend query becomes `SELECT ... WHERE user_id = '' OR '1'='1'`, which evaluates to **TRUE** for every row in the database.
 
-**📸 Evidence:** `![Successful Data Dump](./screenshots/exploit_result.png)`
-
-### Step 3: Database Enumeration (Union-Based SQLi)
-To extract sensitive information (usernames and password hashes), I used the `UNION` operator to join the original query with a request to the `users` table.
-- **Payload:** `' UNION SELECT user, password FROM users -- `
-
-**📸 Evidence:** `![Credential Extraction](./screenshots/security_low.png)`
+**📸 Evidence:**
+- **Normal Request (ID 1):** ![User ID 1](./screenshots/User_ID_1_Test.png)
+- **Successful Exploit:** ![Payload Result](./screenshots/Payload_Test_Screen.png)
 
 ---
 
 ## 🛡️ Mitigation & Recommendations
-Based on my analysis, the vulnerability exists because the application uses **Dynamic SQL**. To remediate this, I recommend the following:
+To prevent SQL Injection, the following security controls must be implemented:
+1. **Prepared Statements (Parameterized Queries):** The most effective defense. It ensures the DB treats input as data, not executable code.
+2. **Input Validation:** Implement strict type-checking (e.g., ensuring User ID is always an integer).
+3. **Principle of Least Privilege:** Ensure the web application's database user has the minimum permissions required to function.
 
-1. **Use Prepared Statements (Parameterized Queries):** This ensures the database treats user input as data, not as executable code.
-2. **Input Validation:** Implement strict allow-lists for user input (e.g., ensuring User ID is always an integer).
-3. **Principle of Least Privilege:** The database user used by the web app should not have administrative privileges.
+---
 
 ## 📂 Project Structure
-- `/scripts/install_docker.sh` $\rightarrow$ Automation for environment setup.
-- `/screenshots/` $\rightarrow$ Visual proof of the exploitation process.
-- `sql_injection_notes.md` $\rightarrow$ Detailed technical breakdown of the attack vectors.
+- `/scripts/` $\rightarrow$ Automation scripts (`install_docker.sh`, `dvwa.sh`).
+- `/screenshots/` $\rightarrow$ Visual evidence of the entire process.
+- `sql_injection_notes.md` $\rightarrow$ Deep-dive technical theory.
+- `Personal.md` $\rightarrow$ Personal learning journey and reflections.
+- `*.mkv` $\rightarrow$ Video demonstrations of the lab and attack.
 
 ---
 *Report generated by Fouenang Miguel Bruce - DevSecOps Path*
