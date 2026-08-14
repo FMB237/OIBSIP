@@ -39,3 +39,10 @@ Attackers used the **Mirai Botnet** (thousands of infected IoT cameras/DVRs) to 
 - **SYN Flood**: Client says "Hello" →→ Server says "Hello back, I'm ready" →→ **Client stays silent.**
 The server keeps a "slot" open waiting for the client. If the attacker does this 10,000 times, the server runs out of slots and can't accept any new real users.So this process is mainly like opening many  sessions and asking the server to wait of the reponse when this is done many times we mainly have a flood in the server.
 3. **Application Layer Attacks (The "Heavy Request")**
+**How it works**: These are "low and slow." They don't use much bandwidth, but they force the server to do a lot of hard work.
+**Real-World Scenario**: The "Search" Attack
+Imagine a website with a search bar. A normal user searches for "Shoes." The server finds them in 0.1 seconds. An attacker sends a request for a search that is incredibly complex (e.g., "Find every product that contains the letter 'e' and sort them by date and price").
+If the attacker sends 100 of these "heavy" requests, the server's CPU hits 100%, and the site freezes.
+And is mainly how this worker as seen even in task 3 with DVWA we can attack a server by entering some types of inputs into the search bar of and application.
+
+
