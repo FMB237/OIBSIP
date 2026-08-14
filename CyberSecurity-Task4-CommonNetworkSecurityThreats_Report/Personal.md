@@ -46,3 +46,36 @@ If the attacker sends 100 of these "heavy" requests, the server's CPU hits 100%,
 And is mainly how this worker as seen even in task 3 with DVWA we can attack a server by entering some types of inputs into the search bar of and application.
 
 
+
+# The Man-in-the-Middle Attack 
+With Normal attacks like the DDOS attack we just did above the attacker attens to attack the server directly but with the main the middle attack the attack place himself between the server and the client so this is a simple slip between the server and the client where by the client will think he is talking with the server but no to the hacker and vice-versa which means that the user will peacefully gives him informations to the hacker. Add the images here for the Man-in-the-Middle
+
+**Let Break this down**
+1. **The concept of "Fake Mailman"**
+Let take the case you are sending a message to a bank 
+Normal: You →→ **Mailman** →→ Bank. This is the normal schemas of user communication with Banks
+MITM: You →→ **Evil Mailman** →→ Bank. So here instead of communicating with the banker you will communicate with an evil man.
+The Evil Mailman opens your letter, reads your account number, maybe changes the "Pay $10" to "Pay $1,000," reseals the envelope, and delivers it to the bank. The bank thinks the request came from you, and you think the bank received your original letter. **Neither of you knows the mailman cheated.** So with this concept of Evilman.Someone can access your account and make more transactions and you will not even know this hard but true  
+
+2. **How to actually happens(Technical Methods)**
+The are sereval ways a hacker can get in the Middle.
+ - **ARP Spoofing (The Local Network Trick)** add image here 
+This mainly happens on a local network like a public Wi-Fi
+When devices are been coonnected to a local network that is in a LAN the all receive a ip address from the server so that devices can communicate with each other but i mainly notice one thing with some dhcp the client devices that i have already exchange ARP with the dhcp server always receive the same ip address the wi-fi generally gives a range of 1 to 255 addresses.
+So the Attacker will send fake **ARP (Address Resolution Protocol)** to the computer like saying "hello I am Router". And at the same time tells the router i'm the user computer. then all the internet traffic will flowss through the attacker computer before the router itself.
+
+3. **DNS Spoofing (The "Wrong Turn" Trick)** add images here
+When we type google.com on our computer brower our computer ask a DNS server for an Ip address
+Here the attackerthe DNS Cache and intercept the request so that he give you a Fake IP address.Then you are send to a fake webiste like google.com here you deliver all your informations to the hacker.
+
+4. **Evil Twin (The Fake Wi-Fi)** add image here
+The attacker sets up a Wi-Fi hotspot named **"Free_Airport_WiFi"** or **"Starbucks_Guest."**
+When you connect to it, the attacker owns the entire network. Every single packet you send goes through their machine first.4
+
+**What can the attacker do?**
+Once attackers are in the middle the can perform the following tasks.
+1. **Eavesdropping**: Just reading your passwords, cookies, and private chats.The generally does that just for testing phases to see if the can hack more
+2. **Session Hijacking**: Stealing your "Session Cookie" so they can log into your Facebook or Email without needing your password.The generally does this to individuals or enterprise that have alot of cash so that can ask a ransom to give to them for you get back your account access.
+3. **Data Manipulation**: Changing the destination of a bank transfer or injecting malicious code into a website you are visiting.This is a classic and most common action performed after hacking a system.
+
+**How do we stop it? (The Defense)**
