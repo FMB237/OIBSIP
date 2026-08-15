@@ -78,4 +78,13 @@ Once attackers are in the middle the can perform the following tasks.
 2. **Session Hijacking**: Stealing your "Session Cookie" so they can log into your Facebook or Email without needing your password.The generally does this to individuals or enterprise that have alot of cash so that can ask a ransom to give to them for you get back your account access.
 3. **Data Manipulation**: Changing the destination of a bank transfer or injecting malicious code into a website you are visiting.This is a classic and most common action performed after hacking a system.
 
-**How do we stop it? (The Defense)**
+**How do we stop it? (The Defense)** add image of prevention here 
+Here is one of the mose important paert of this work 
+1. By using **HTTPS(SSL/TLS)**: This is where the lock icon in the browser because important.This lock means we are encrypting our data that means even if the hacker intercepts the data the will be encrypted so he will not be able to do anything with it.
+2. **VPN**: bY using a Virtual Private network in other to pass our data through and encrypted tunnel so that even if we face **EVIL TWIN** the attackzr will only see encryted data.
+3. **Static ARP** : for higher security servers the admin manually tells the computer whihc **MAC ADDRESS** belongs to the router so that the computer gets it address from it directly without passing through any other source.
+4. **MFA (Multi-Factor Authentication)**: Even if the attacker steals your password via MITM, they still can't get into your account without the code from your phone.
+   
+# IP Spoofing (The "Identity Theft" of Packets)  add image here
+The concepts of Ip spoofing is simple is when the attacker send packets to the target but mainly fakes **The Source Ip address in the packer header** since he only fake the packet header if the server is not well structure for this organization then the ip then packet stealin will be organise.
+**The Analogy**: Imagine sending a prank letter to someone. Instead of putting your own return address on the envelope, you put the return address of your enemy. When the victim replies to the letter, they aren't replying to you—they are replying to your enemy.This is a fake and brillant plane that puts all the system into a bas trap and you profit from that.
