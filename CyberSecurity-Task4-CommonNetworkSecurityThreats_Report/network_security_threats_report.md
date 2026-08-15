@@ -202,3 +202,27 @@ Imagine the city's official phonebook. A hacker sneaks into the printing office 
 * **DNSSEC (DNS Security Extensions):** This is the primary defense. It adds digital signatures to DNS records, allowing the resolver to verify that the information is authentic and hasn't been tampered with.
 * **Shortening TTL (Time to Live):** Reducing the time a record stays in the cache limits the window of time an attacker can redirect traffic.
 * **Using Trusted DNS Providers:** Using providers with robust security infrastructures (like Cloudflare or Google DNS) reduces the risk of poisoning.
+
+---
+
+## 7. Summary Comparison Table
+
+| Threat | Attack Vector | Who is at Risk? | Difficulty to Execute | Ease of Mitigation |
+| :--- | :--- | :--- | :--- | :--- |
+| **DoS/DDoS** | Network/App Layer | High-traffic servers, APIs | Medium (Botnets) | Medium (CDN/WAF) |
+| **MITM** | Local Network/Wi-Fi | Public Wi-Fi users, LANs | Medium | High (HTTPS/VPN) |
+| **IP Spoofing** | IP Header Manipulation | Trust-based networks, ACLs | Medium | Medium (Filtering) |
+| **DNS Poisoning** | DNS Cache/Resolver | All internet users | High | High (DNSSEC) |
+
+## 8. Conclusion: Key Takeaways for Network Administrators
+
+1.  **Defense in Depth:** No single tool is enough. A combination of firewalls, encryption (TLS), and monitoring is required to cover all vectors.
+2.  **Zero Trust Architecture:** Never trust a packet just because it comes from an "internal" IP. Implement strict authentication and verification for every request.
+3.  **Continuous Monitoring:** Attacks like DDoS and MITM are often only detectable through anomalies in traffic patterns. Real-time logging and alerting are non-negotiable.
+
+## 9. References
+
+*   **NIST (National Institute of Standards and Technology):** Special Publications on Network Security and Guide to DDoS Mitigation. [nist.gov](https://www.nist.gov)
+*   **CISA (Cybersecurity & Infrastructure Security Agency):** Alerts and Technical Guides on DNS Spoofing and Social Engineering. [cisa.gov](https://www.cisa.gov)
+*   **MITRE ATT&CK Framework:** Technical documentation on Adversary Tactics and Techniques (T1566 - Phishing, T1557 - Adversary-in-the-Middle). [attack.mitre.org](https://attack.mitre.org)
+*   **OWASP (Open Web Application Security Project):** Top 10 Web Application Security Risks and Prevention Cheat Sheets. [owasp.org](https://owasp.org)
