@@ -3,7 +3,25 @@
 **OASIS Infobyte SIP - Cyber Security Track**
 **Task:** CyberSecurity-Task8-NetworkPactureWithWireshark
 **Student:** Miguel Bruce
-**Date:** 2025
+**Date:** 22/08/2026
+
+## Table of Contents
+
+- [Objective](#objective)
+- [Tools & Environment](#tools--environment)
+- [Setup & Installation](#setup--installation)
+- [Lab Procedure](#lab-procedure)
+- [Findings](#findings)
+  - [Wireshark Version & Dashboard](#wireshark-version--dashboard)
+  - [HTTP Traffic Capture](#http-traffic-capture)
+  - [DNS Traffic](#dns-traffic)
+  - [TCP 3-Way Handshake](#tcp-3-way-handshake)
+  - [Unencrypted Data Exposure](#unencrypted-data-exposure)
+- [Security Analysis](#security-analysis)
+- [Glossary](#glossary)
+- [Remediation Recommendations](#remediation-recommendations)
+- [Deliverables](#deliverables)
+- [Conclusion](#conclusion)
 
 ## Objective
 
@@ -34,33 +52,40 @@ sudo usermod -aG wireshark $USER
 Logout / restart required to apply group permissions.
 
 Version check:
+
 ```bash
 wireshark --version
 ```
-Screenshot: `screenshots/WireShark_Version.png`
+
+![Wireshark Version](screenshots/WireShark_Version.png)
 
 Launch:
+
 ```bash
 wireshark
 ```
 
 Wireshark dashboard shows all network interfaces including wlo1 and Docker bridge networks.
-Screenshot: `screenshots/Wireshark_dasboard.png`
+
+![Wireshark Dashboard](screenshots/Wireshark_dasboard.png)
 
 ## Lab Procedure
 
 1. **Lab Setup**
+   
    - Host machine: Linux Mint
    - VM: AntiX for isolated testing
    - DVWA container launched to generate controlled HTTP traffic
    - Capture performed on host interface to monitor traffic to DVWA server
 
 2. **Capture**
+   
    - Started capture on selected interface
    - Generated traffic for minimum 2 minutes by browsing to DVWA and performing HTTP requests
    - Saved capture as `Scan_result.pcapng` and `Wireshark_Capture.pcapng`
 
 3. **Filtering & Analysis**
+   
    - **HTTP filter:** `http`
    - **DNS filter:** `dns`
    - **TCP filter:** `tcp`
@@ -69,47 +94,63 @@ Screenshot: `screenshots/Wireshark_dasboard.png`
 ## Findings
 
 ### Wireshark Version & Dashboard
-- Wireshark installed and running successfully
-- Dashboard shows interfaces: wlo1, docker bridges
-- Screenshots: `WireShark_Version.png`, `Wireshark_dasboard.png`
+
+Wireshark installed and running successfully. Dashboard shows interfaces: wlo1, docker bridges.
+
+![Wireshark Version](screenshots/WireShark_Version.png)
+
+![Wireshark Dashboard](screenshots/Wireshark_dasboard.png)
 
 ### HTTP Traffic Capture
+
 Filter applied: `http`
+
 HTTP packets captured from DVWA container traffic. Unencrypted HTTP GET/POST requests visible in clear text.
-Screenshot: `screenshots/Wireshark_HTTP_Capture.png`
+
+![HTTP Capture](screenshots/Wireshark_HTTP_Capture.png)
 
 **Security Observation:** HTTP traffic is unencrypted. Username, password and form data can be read directly from packet payload. This demonstrates eavesdropping risk on local network.
 
 ### DNS Traffic
+
 Filter applied: `dns`
+
 DNS queries and responses captured showing domain resolution for web requests.
-Screenshot: `screenshots/DNS_Scan.png`
+
+![DNS Scan](screenshots/DNS_Scan.png)
 
 ### TCP 3-Way Handshake
+
 Filter applied: `tcp`
+
 Complete TCP connection establishment observed:
+
 - **SYN** - Client initiates connection
 - **SYN-ACK** - Server acknowledges
 - **ACK** - Client confirms
 
-Screenshots:
-- `screenshots/TCP_Scan.png`
-- `screenshots/TCP_Scan_ACK.png`
-- `screenshots/TCP_Scan.Ace.png`
+![TCP Scan](screenshots/TCP_Scan.png)
+
+![TCP Scan ACK](screenshots/TCP_Scan_ACK.png)
+
+![TCP Scan Ace](screenshots/TCP_Scan.Ace.png)
 
 This confirms proper TCP connection establishment before data transfer.
 
 ### Unencrypted Data Exposure
+
 From HTTP capture, request headers and form data are visible in plain text under `Hypertext Transfer Protocol` and `HTML Form Data` sections. Sensitive credentials transmitted over HTTP can be intercepted by any attacker on the same network segment.
 
 ## Security Analysis
 
 **Why unencrypted HTTP is dangerous:**
+
 - Data travels in clear text, readable by anyone with packet capture capability
 - Credentials, session cookies, and personal data exposed to MITM attacks
 - No integrity protection - packets can be modified in transit
 
 **How HTTPS prevents this:**
+
 - TLS encryption encrypts payload between client and server
 - Certificate validation ensures authenticity
 - Prevents eavesdropping and tampering
@@ -144,4 +185,5 @@ From HTTP capture, request headers and form data are visible in plain text under
 This task successfully demonstrated live network traffic capture with Wireshark, protocol filtering, TCP handshake analysis, and identification of unencrypted HTTP risks. The lab confirms the importance of encryption and secure protocols in modern network security.
 
 ---
+
 **Ethics Note:** All captures performed on networks and systems owned or explicitly authorized for testing. DVWA used in isolated local environment only.
