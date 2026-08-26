@@ -185,5 +185,3 @@ From HTTP capture, request headers and form data are visible in plain text under
 This task successfully demonstrated live network traffic capture with Wireshark, protocol filtering, TCP handshake analysis, and identification of unencrypted HTTP risks. The lab confirms the importance of encryption and secure protocols in modern network security.
 
 ---
-
-**Ethics Note:** All captures performed on networks and systems owned or explicitly authorized for testing. DVWA used in isolated local environment only.
