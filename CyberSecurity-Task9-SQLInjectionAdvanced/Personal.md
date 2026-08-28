@@ -12,4 +12,12 @@
 8. Now that the script is been download i need to make it excuteable using the command **chmod +x <Script name>**
 9. I have added a simple quick installation video that will be used for this repo set up  and also add the screenshoy of the installation of sqlmap to the project.
 10. As can see by exploring the Burp suite tool i can mainly see it is a very powerful tool with much options and filters it is really a fully complet network tool.
- 
+11. I'm mainly back of a time on using Burp Suite and Dawn bro it was some tricky at the beginning but now it is find.
+12. So What the Burp Suite and what is it used for ?? i mainly what i wanted to know and learn okay Burp Suite is mainly a modern Tools used to find Vulnerabilties on Web servers and even Wbeistes i wokrks mainly by intercepting requests from the client-site  the **Frontend**  before it reaches the **Backend**(The server) 
+13. So here we justl launch our lab and login then move to our localhost ,login as admin, set the Security level as medium and then move to the sqlinjection tap 
+14.  But we mainly gonna face a differcent as compare with task3  at medium level we mainly have no input Form to eneter our data  just a drop-down menu of this which is been label from 1 to 5  **add that images here**
+15.  Now this is where the Burp suite tool enters in scence for usage we gonna make a request to the server and then use Burp Suite to intercept that 
+16.  Then change the format of our request so that i should fit our propose Just add the **Command: `id=1 OR 1=1`** So that all the informations about people inside the DB should be given that is the whole Table will be dropped table of **users**
+17.  For Database name we gonna use the command **id=1 UNION SELECT null, database()&Submit=Submit**
+18.  Those are mainly the things to be done into this lab 
+19.  The lab has already been set up let move to the video 
