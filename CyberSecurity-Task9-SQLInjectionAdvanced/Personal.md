@@ -20,4 +20,10 @@
 16.  Then change the format of our request so that i should fit our propose Just add the **Command: `id=1 OR 1=1`** So that all the informations about people inside the DB should be given that is the whole Table will be dropped table of **users**
 17.  For Database name we gonna use the command **id=1 UNION SELECT null, database()&Submit=Submit**
 18.  Those are mainly the things to be done into this lab 
-19.  The lab has already been set up let move to the video 
+19.  The lab has already been set up let move to the video
+20.  Now i will move to the sqlmap injection part i will associate it with Burp Suite in other to get all the informations about my DB 
+21.  Since use dvwa into a simple Docker container and not on kali my link for it into my browser is **http://localhost** since i'm actually in port 80.
+22.  I also realise i has to take the Cookie Token of my pages for this scan since i can now use Burp Suite for this i will intercept that cookie when i login to dvwa then use it for me sqlamp scan script
+23. **Script-Syntax:`sqlmap -u "http://localhost/vulnerabilities/sqli/?id=1&Submit=Submit"--cookie="PHPSESSID=YOUR_SESSION; security=medium" --level=3 --risk=2 --batch --dbs`**
+24. I will just replace the cookie variable here.
+ 
