@@ -1,0 +1,54 @@
+Nmap scan report for 192.168.122.135
+Host is up (0.00044s latency).
+Not shown: 998 closed tcp ports (reset)
+PORT     STATE SERVICE    VERSION
+22/tcp   open  ssh        OpenSSH 10.0p2 Debian 7.0nosystemd1 (protocol 2.0)
+6566/tcp open  tcpwrapped
+MAC Address: 52:54:00:13:96:82 (QEMU virtual NIC)
+Device type: general purpose
+Running: Linux 4.X|5.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5
+OS details: Linux 4.15 - 5.8
+Network Distance: 1 hop
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for 192.168.122.136
+Host is up (0.00042s latency).
+Not shown: 998 closed tcp ports (reset)
+PORT     STATE SERVICE    VERSION
+22/tcp   open  ssh        OpenSSH 10.0p2 Debian 7.0nosystemd1 (protocol 2.0)
+6566/tcp open  tcpwrapped
+MAC Address: 52:54:00:13:96:82 (QEMU virtual NIC)
+Device type: general purpose
+Running: Linux 4.X|5.X
+OS CPE: cpe:/o:linux:linux_kernel:4 cpe:/o:linux:linux_kernel:5
+OS details: Linux 4.15 - 5.8
+Network Distance: 1 hop
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for bruce-HP-ProBook-650-G1 (192.168.122.1)
+Host is up (0.000086s latency).
+Not shown: 996 closed tcp ports (reset)
+PORT     STATE    SERVICE    VERSION
+22/tcp   open     ssh        OpenSSH 9.6p1 Ubuntu 3ubuntu13.18 (Ubuntu Linux; protocol 2.0)
+53/tcp   open     domain     dnsmasq 2.90
+5432/tcp filtered postgresql
+9000/tcp filtered cslistener
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.94SVN%E=4%D=8/29%OT=22%CT=1%CU=35834%PV=Y%DS=0%DC=L%G=Y%TM=6A93
+OS:5B5E%P=x86_64-pc-linux-gnu)SEQ(SP=FD%GCD=1%ISR=103%TI=Z%CI=Z%TS=21)SEQ(S
+OS:P=FD%GCD=1%ISR=103%TI=Z%CI=Z%II=I%TS=21)OPS(O1=MFFD7ST11NWA%O2=MFFD7ST11
+OS:NWA%O3=MFFD7NNT11NWA%O4=MFFD7ST11NWA%O5=MFFD7ST11NWA%O6=MFFD7ST11)WIN(W1
+OS:=FFCB%W2=FFCB%W3=FFCB%W4=FFCB%W5=FFCB%W6=FFCB)ECN(R=Y%DF=Y%T=40%W=FFD7%O
+OS:=MFFD7NNSNWA%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)T2(R=N)T3(R=
+OS:N)T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R=Y%DF=Y%T=40%W=0%S=Z%A
+OS:=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T7(R=Y%D
+OS:F=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL
+OS:=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD=S)
+
+Network Distance: 0 hops
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 256 IP addresses (3 hosts up) scanned in 24.30 seconds
