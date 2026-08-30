@@ -3,7 +3,7 @@
 Welcome to my official internship repository for the **Oasis Infobyte Student Internship Program**. This repository documents my journey and the practical tasks I completed as a **Security Analyst Intern** in the Cyber Security track.
 
 ## 🎓 Intern Profile
-- **Name:** Miguel Bruce
+- **Name:** Fouenang Miguel Bruce
 - **Track:** Cyber Security
 - **Goal:** To apply theoretical security concepts to real-world scenarios, focusing on network reconnaissance, vulnerability assessment, and penetration testing.
 
