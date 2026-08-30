@@ -8,3 +8,6 @@
 6. For Nikto Scan this will be mainly easy since we will just scan DVWA which is also web server for the lab just following the **Commands:`nikto -h [web-server-URL] -o nikto_results.txt`**.Need a video also
 7. Making screenshots and place them inside the screenshots folder for usage during report explanation.
 8. For phase 1 since i have a many docker containers including dvwa the scan will be too long if a go for that them so i will better do the scan range with me host and my AntiX Vm Since the both on **192.168.122.0/24**
+9. Phase 1 is done i can move to phase 2 which this 
+10. Now that Phase 2 is been done i can move on to phase 3 Which is mainly Nikto scan where i will scan the DVWA container on my Host mahcine from my AntiX.
+11. Let me just add the screenshot folder and images into it then i will be done
